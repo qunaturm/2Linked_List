@@ -14,12 +14,7 @@ namespace _2Linked_List.Model
         public Item<T> Tail { get; private set; }
         public int Counter { get; private set; }
 
-        public LinkedList()
-        {
-            Head = null;
-            Tail = null;
-            Counter = 0;
-        }
+        public LinkedList(){ Clear(); }
 
         public LinkedList(T data)
         {
@@ -47,6 +42,72 @@ namespace _2Linked_List.Model
                 Tail = item;
                 Counter += 1;
                 return;
+            }
+        }
+
+        public void AddToHead(T data)
+        {
+            if (Head == null)
+            {
+                var item = new Item<T>(data);
+                Head = Tail = item;
+                Head.Prev = Tail.Next = null;
+                Counter = 1;
+                return;
+            }
+            else
+            {
+                var item = new Item<T>(data);
+                Head.Prev = item;
+                item.Next = Head;
+                Head = item;
+                Counter += 1;
+                return;
+            }
+        }
+
+        public void AddAfterItem(T val, T data) //val - элемент поле к-го вставляем, data - что вставляем
+        {
+            if (Head != null)
+            {
+                var item = new Item<T>(data);
+                if (Tail == item)
+                {
+                    Add(data);
+                    return;
+                }
+                if (Head == item)
+                {
+                    AddToHead(data);
+                    return;
+                }
+                var curr = Head.Next;
+                var prev = Head;
+                while(curr != null)
+                {
+                    if (curr.Data.Equals(val))
+                    {
+                        prev.Next = item;
+                        item.Prev = prev;
+                        item.Next = curr;
+                        curr.Prev = item;
+                        return;
+                    }
+                    else
+                    {
+                        if(prev == Head)
+                        {
+                            prev = curr;
+                            curr = curr.Next;
+                        }
+                        else
+                        {
+                            prev = curr;
+                            curr = curr.Next;
+                            curr.Prev = prev;
+                        }
+                    }
+                }
             }
         }
         
@@ -96,6 +157,13 @@ namespace _2Linked_List.Model
                     }
                 }
             }
+        }
+
+        public void Clear()
+        {
+            Head = null;
+            Tail = null;
+            Counter = 0;
         }
 
         public IEnumerator GetEnumerator()
