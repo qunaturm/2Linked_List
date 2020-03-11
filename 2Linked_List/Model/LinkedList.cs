@@ -83,6 +83,7 @@ namespace _2Linked_List.Model
                             prev.Next = curr;
                             curr.Prev = prev;
                             Counter -= 1;
+                            return;
                         }
                         else
                         {
@@ -91,6 +92,7 @@ namespace _2Linked_List.Model
                             curr.Prev = prev;
 
                         }
+                        //throw new ItemNotFound();
                     }
                 }
             }
