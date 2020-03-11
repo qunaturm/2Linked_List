@@ -23,13 +23,17 @@ namespace _2Linked_List
             l1.Add(2);
             l1.Add(3);
             l1.Add(4);
+            l1.Add(5);
+            l1.Add(6);
             Print(l1);
 
-            //l1.Del(2);
-            //Print(l1);
-
-            l1.Del(1);
+            l1.Del(2);
             Print(l1);
+
+            l1.Del(6);
+            Print(l1);
+
+            Console.ReadLine();
         }
     }
 }

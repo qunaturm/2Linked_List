@@ -56,10 +56,17 @@ namespace _2Linked_List.Model
             {
                 var item = new Item<T>(data);
 
-                if (Head.Data.Equals(item))
+                if (Head.Data.Equals(data))
                 {
                     Head = Head.Next;
                     Head.Prev = null;
+                    Counter -= 1;
+                    return;
+                }
+                if (Tail.Data.Equals(data))
+                {
+                    Tail = Tail.Prev;
+                    Tail.Next = null;
                     Counter -= 1;
                     return;
                 }
@@ -70,17 +77,19 @@ namespace _2Linked_List.Model
                     var prev = Head;
                     while (curr.Next != null)
                     {
-                        if (curr.Data.Equals(item))
+                        if (curr.Data.Equals(data))
                         {
-                            prev.Next = curr.Next;
                             curr = curr.Next;
+                            prev.Next = curr;
                             curr.Prev = prev;
                             Counter -= 1;
                         }
                         else
                         {
+                            prev = curr;
                             curr = curr.Next;
-                            prev.Next = curr.Prev;
+                            curr.Prev = prev;
+
                         }
                     }
                 }
